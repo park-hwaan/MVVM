@@ -12,6 +12,7 @@ import com.example.viewmodel.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     lateinit var viewModel : MainViewModel
+    private var manager = supportFragmentManager
 
     private lateinit var binding: ActivityMainBinding
 
@@ -21,18 +22,11 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        binding.num.text = viewModel.getCount().toString()
-
-        binding.plus.setOnClickListener {
-            viewModel.plus()
-            binding.num.text = viewModel.getCount().toString()
-        }
-
-        binding.minus.setOnClickListener {
-            viewModel.minus()
-            binding.num.text = viewModel.getCount().toString()
-        }
-
+        val transaction = manager.beginTransaction()
+        val fragment = TestFragment()
+        transaction.replace(R.id.frameLayout, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
 
     }
 }
