@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.viewmodel.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var viewModel : MainViewModel
 
     private lateinit var binding: ActivityMainBinding
 
@@ -15,17 +19,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val array = arrayListOf<String>()
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        array.add("a")
-        array.add("b")
-        array.add("c")
+        binding.num.text = viewModel.getCount().toString()
 
-        val viewAdapter = ViewAdapter(array)
+        binding.plus.setOnClickListener {
+            viewModel.plus()
+            binding.num.text = viewModel.getCount().toString()
+        }
 
-        val rv = binding.recy
-        rv.adapter = viewAdapter
-        rv.layoutManager = LinearLayoutManager(this)
+        binding.minus.setOnClickListener {
+            viewModel.minus()
+            binding.num.text = viewModel.getCount().toString()
+        }
 
 
     }
