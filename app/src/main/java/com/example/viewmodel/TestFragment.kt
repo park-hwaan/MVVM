@@ -22,17 +22,6 @@ class TestFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(TestFragmentViewModel::class.java)
 
-        binding.result.text = viewModel.countValue.toString()
-
-        binding.plus.setOnClickListener{
-            viewModel.plus()
-            binding.result.text = viewModel.countValue.toString()
-        }
-
-        binding.minus.setOnClickListener {
-            viewModel.minus()
-            binding.result.text = viewModel.countValue.toString()
-        }
 
 
 

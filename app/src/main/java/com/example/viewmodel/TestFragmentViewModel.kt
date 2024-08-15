@@ -1,19 +1,17 @@
 package com.example.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class TestFragmentViewModel : ViewModel() {
-    var countValue = 0
+    var testMutableLiveData = MutableLiveData(0)
 
     fun plus(){
-        countValue++
+        testMutableLiveData.value = testMutableLiveData.value!!.plus(1)
     }
 
     fun minus(){
-        countValue--
+        testMutableLiveData.value = testMutableLiveData.value!!.minus(1)
     }
 
-    fun getCount() : Int{
-        return countValue
-    }
 }
