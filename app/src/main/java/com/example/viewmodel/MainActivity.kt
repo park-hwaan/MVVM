@@ -23,10 +23,20 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[TestFragmentViewModel::class.java]
 
+        //observe는 livedata의 value의 값의 변경을 감지하고 호출되는 부분
+        viewModel.map.observe(this,Observer{
+            binding.result1.text = it.toString()
+        })
+
+        viewModel.switchMap.observe(this,Observer{
+            binding.result2.text = it.toString()
+        })
+
         binding.plus.setOnClickListener {
-            viewModel.plus()
-            binding.result.text = viewModel.testMutableLiveData.value.toString()
+            val count = binding.inputArea.text.toString().toInt()
+            viewModel.setLiveData(count)
         }
+
 
 
 
