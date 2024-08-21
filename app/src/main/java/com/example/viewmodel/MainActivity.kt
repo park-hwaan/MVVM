@@ -14,30 +14,19 @@ import com.example.viewmodel.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var viewModel : TestFragmentViewModel
+    lateinit var viewModel : MainViewModel
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        binding.vm = viewModel
+        binding.lifecycleOwner = this // ??? 뭔지 찾아보기
 
-        viewModel = ViewModelProvider(this)[TestFragmentViewModel::class.java]
-
-        //observe는 livedata의 value의 값의 변경을 감지하고 호출되는 부분
-        viewModel.map.observe(this,Observer{
-            binding.result1.text = it.toString()
-        })
-
-        viewModel.switchMap.observe(this,Observer{
-            binding.result2.text = it.toString()
-        })
-
-        binding.plus.setOnClickListener {
-            val count = binding.inputArea.text.toString().toInt()
-            viewModel.setLiveData(count)
+        binding.btn.setOnClickListener {
+            viewModel.getNextData()
         }
-
-
 
 
 

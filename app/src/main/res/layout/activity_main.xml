@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+        <variable
+            name="vm"
+            type="com.example.viewmodel.MainViewModel" />
+        
+    </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -9,34 +16,35 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-        <EditText
-            android:id="@+id/inputArea"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="50sp"
-            android:text="0" />
-
-        <Button
-            android:id="@+id/plus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"/>
-
         <TextView
             android:id="@+id/result1"
+            android:text="@{vm.liveWord}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="50sp"
-            android:textColor="@color/black"
-            android:text="결과"/>
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/result2"
+            android:text="@{vm.randomLiveWord}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="50sp"
-            android:textColor="@color/black"
-            android:text="결과"/>
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/result3"
+            android:text="@{vm.newData}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50sp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
 
 
     </LinearLayout>
